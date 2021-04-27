@@ -102,14 +102,14 @@ window.select15Seconds = function() {
 
 window.toggleLoop = function() {
     var loopToggle = document.getElementById("loop_toggle");
-    console.log("loopToggle: "+loopToggle);
+   //console.log("loopToggle: "+loopToggle);
     var loopToggleComponent = loopToggle.components['gui-toggle'];
-    console.log("loopToggleComponent: "+loopToggleComponent);
+   //console.log("loopToggleComponent: "+loopToggleComponent);
     var musicPlayer = document.getElementById("musicPlayer");
     var loopToggleComponentChecked = loopToggleComponent.data.checked;
-    console.log("loopToggleComponentChecked: "+loopToggleComponentChecked);
+   //console.log("loopToggleComponentChecked: "+loopToggleComponentChecked);
     musicPlayer.setAttribute('sound', 'loop', loopToggleComponentChecked);
-    console.log("toggled loop, current value: "+musicPlayer.getAttribute('sound', 'loop'));
+   //console.log("toggled loop, current value: "+musicPlayer.getAttribute('sound', 'loop'));
 }
 
 window.playMusic = function() {
@@ -123,7 +123,7 @@ window.pauseMusic = function() {
 }
 
 window.getProjectStatus = function(projectId) {
-    console.log("in getProjecStatus, projectId: "+projectId);
+   //console.log("in getProjecStatus, projectId: "+projectId);
     var request = new XMLHttpRequest();
     request.onreadystatechange = function(){
         if(request.readyState == 4){
@@ -136,12 +136,12 @@ window.getProjectStatus = function(projectId) {
                         var width = percentComplete * 0.01 * 2.5; // TODO: get width dynamically
                         if (width < 0.1) width = 0.1;
                         var position = -1.25 + width*0.5;
-                        console.log("width: "+width+", position: "+position);
+                       //console.log("width: "+width+", position: "+position);
                         progressMeter.setAttribute('geometry', 'width', width);
                         progressMeter.setAttribute('position', 'x', position);
-                        console.log("waiting, percent_complete: "+percentComplete+", project id: "+resp.id);
+                       //console.log("waiting, percent_complete: "+percentComplete+", project id: "+resp.id);
                         setTimeout(function() {
-                            console.log("about to call getProjectStatus recursively with projectId: "+resp.id);
+                           //console.log("about to call getProjectStatus recursively with projectId: "+resp.id);
                             window.getProjectStatus(resp.id);
                         }, 200);
                     } else if (resp.status == 'created') {
@@ -149,8 +149,8 @@ window.getProjectStatus = function(projectId) {
                         for (var i = 0; i < resp.files.length; i++) {
                             var fileType = resp.files[i].content_type;
                             var fileURL = resp.files[i].download_url.replace('https://jimmy.ampermusic.com/v1','/amper');
-                            console.log("file type: "+fileType);
-                            console.log("file url: "+fileURL);
+                           //console.log("file type: "+fileType);
+                           //console.log("file url: "+fileURL);
                             if (fileType == 'audio/mp3') {
                                 var musicPlayer = document.getElementById("musicPlayer");
                                 musicPlayer.setAttribute('sound', 'src', fileURL);
@@ -160,34 +160,34 @@ window.getProjectStatus = function(projectId) {
                         progressMeter.setAttribute('position', 'x', 0);
                     }
                 } catch (e) {
-                    console.log('Error calling getProjecStatus: [' + e.message + ']');
+                   //console.log('Error calling getProjecStatus: [' + e.message + ']');
                 }
             }
         }
     };
-    console.log("about to send get request for project status");
+   //console.log("about to send get request for project status");
     request.open('GET', `/amper/projects/${projectId}`);
     request.setRequestHeader("Content-Type", "application/json");
     request.send();
 }
 
 window.submitMusicCreate = function() {
-    console.log("submitting amperCreateRequest, descriptor: "+window.musicType+", time: "+window.musicLength);
+   //console.log("submitting amperCreateRequest, descriptor: "+window.musicType+", time: "+window.musicLength);
     var request = new XMLHttpRequest();
     request.onreadystatechange = function(){
         if(request.readyState == 4){
             try {
                 var resp = JSON.parse(request.response);
-                console.log(request.response);
+               //console.log(request.response);
                 var projectId = resp.id;
-                console.log("project id: "+projectId);
+               //console.log("project id: "+projectId);
                 window.getProjectStatus(projectId);
             } catch (e){
-                console.log('Error calling amperCreateRequest: [' + e.message + ']');
+               //console.log('Error calling amperCreateRequest: [' + e.message + ']');
             }
         }
     };
-    console.log("about to send get request");
+   //console.log("about to send get request");
     request.open('GET', `/amper/projects/${window.musicType}/${window.musicLength}`);
     request.setRequestHeader("Content-Type", "application/json");
     request.send();

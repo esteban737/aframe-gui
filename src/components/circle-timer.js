@@ -15,7 +15,7 @@ AFRAME.registerComponent('gui-circle-timer', {
         var guiItem = el.getAttribute("gui-item");
         this.guiItem = guiItem;
         var guiInteractable = el.getAttribute("gui-interactable");
-        console.log("in timer callback, guiInteractable: "+JSON.stringify(guiInteractable));
+       //console.log("in timer callback, guiInteractable: "+JSON.stringify(guiInteractable));
 
         //fallback for old font-sizing
         if(data.fontSize > 20) { // 150/750
@@ -95,7 +95,7 @@ AFRAME.registerComponent('gui-circle-timer', {
             this.textEntity.setAttribute('troika-text', `value: ${data.countDown};`);
 
             if(left == 1){
-                console.log('fire callback on the last second');
+               //console.log('fire callback on the last second');
             }
         }
     },
@@ -126,8 +126,8 @@ AFRAME.registerComponent('gui-circle-timer', {
     callback: function () {
         var guiInteractable = this.el.getAttribute("gui-interactable");
         var clickActionFunctionName = guiInteractable.clickAction;
-        console.log("in timer callback, guiInteractable: "+JSON.stringify(guiInteractable));
-        console.log("in button, clickActionFunctionName: "+clickActionFunctionName);
+       //console.log("in timer callback, guiInteractable: "+JSON.stringify(guiInteractable));
+       //console.log("in button, clickActionFunctionName: "+clickActionFunctionName);
         // find object
         var clickActionFunction = window[clickActionFunctionName];
         //console.log("clickActionFunction: "+clickActionFunction);

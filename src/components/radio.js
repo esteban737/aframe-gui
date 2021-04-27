@@ -73,7 +73,7 @@ AFRAME.registerComponent('gui-radio', {
             radioborder.setAttribute('animation__leave', `property: material.color; from: ${data.hoverColor}; to:${data.borderColor}; dur:200; easing: easeOutQuad;`);
         });
         el.addEventListener(data.on, function (evt) {
-            // console.log('I was clicked at: ', evt.detail.intersection.point); // Commented out to use own made click event without defining detail
+            ////console.log('I was clicked at: ', evt.detail.intersection.point); // Commented out to use own made click event without defining detail
             data.checked = !data.checked;
             if (data.checked) {
                 radioCenter.removeAttribute('animation__colorOut');
@@ -116,7 +116,7 @@ AFRAME.registerComponent('gui-radio', {
         this.updateToggle(data.active)
 
         if(this.textEntity){
-            console.log("has textEntity: "+this.textEntity);
+           //console.log("has textEntity: "+this.textEntity);
 
             var oldEntity = this.textEntity;
             oldEntity.parentNode.removeChild(oldEntity);
@@ -124,7 +124,7 @@ AFRAME.registerComponent('gui-radio', {
             this.setText(this.data.value);
    
         }else{
-            console.log("no textEntity!");   
+           //console.log("no textEntity!");   
         }
 
     },

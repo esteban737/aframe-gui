@@ -84,7 +84,7 @@ AFRAME.registerComponent('gui-toggle', {
         });
 
         el.addEventListener(data.on, function (evt) {
-            console.log('I was clicked at: ', evt.detail.intersection.point);
+           //console.log('I was clicked at: ', evt.detail.intersection.point);
             data.checked = !data.checked;
             if(data.checked){
                 toggleBox.removeAttribute('animation__colorOut');
@@ -98,9 +98,9 @@ AFRAME.registerComponent('gui-toggle', {
                 toggleHandle.setAttribute('animation__positionOut', `property: position; from: ${toggleHandleXEnd} 0 0.02; to:${toggleHandleXStart} 0 0.02; dur:200; easing:easeInOutCubic;`);
             }
             var guiInteractable = el.getAttribute("gui-interactable");
-            console.log("guiInteractable: "+guiInteractable);
+           //console.log("guiInteractable: "+guiInteractable);
             var clickActionFunctionName = guiInteractable.clickAction;
-            console.log("clickActionFunctionName: "+clickActionFunctionName);
+           //console.log("clickActionFunctionName: "+clickActionFunctionName);
             // find object
             var clickActionFunction = window[clickActionFunctionName];
             //console.log("clickActionFunction: "+clickActionFunction);
@@ -115,7 +115,7 @@ AFRAME.registerComponent('gui-toggle', {
         this.updateToggle(data.active)
 
         if(this.textEntity){
-            console.log("has textEntity: "+this.textEntity);
+           //console.log("has textEntity: "+this.textEntity);
 
             var oldEntity = this.textEntity;
             oldEntity.parentNode.removeChild(oldEntity);
@@ -123,7 +123,7 @@ AFRAME.registerComponent('gui-toggle', {
             this.setText(this.data.value);
    
         }else{
-            console.log("no textEntity!");   
+           //console.log("no textEntity!");   
         }
         
     },

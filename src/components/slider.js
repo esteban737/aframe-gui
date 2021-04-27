@@ -60,10 +60,10 @@ AFRAME.registerComponent('gui-slider', {
         });
 
         el.addEventListener('click', function (evt) {
-            console.log('I was clicked at: ', evt.detail.intersection.point);
+           //console.log('I was clicked at: ', evt.detail.intersection.point);
             var localCoordinates = el.object3D.worldToLocal(evt.detail.intersection.point);
-            console.log('local coordinates: ', localCoordinates);
-            console.log('current percent: '+data.percent);
+           //console.log('local coordinates: ', localCoordinates);
+           //console.log('current percent: '+data.percent);
             var sliderBarWidth = 2; // total width of slider bar
             if (localCoordinates.x <= (-sliderBarWidth / 2)) {
                 data.percent = 0;
@@ -72,16 +72,16 @@ AFRAME.registerComponent('gui-slider', {
             } else {
                 data.percent = (localCoordinates.x + (sliderBarWidth /2)) / sliderBarWidth;
             }
-            console.log("handle container: "+handleContainer);
+           //console.log("handle container: "+handleContainer);
             sliderActiveBar.setAttribute('geometry', `primitive: box; width: ${data.percent*2}; height: 0.05; depth: 0.03;`);
             sliderActiveBar.setAttribute('position', `${data.percent-1} 0 0.02`);
             sliderBar.setAttribute('geometry', `primitive: box; width: ${2-data.percent*2}; height: 0.05; depth: 0.03;`);
             sliderBar.setAttribute('position', `${data.percent*1} 0 0.02`);
             handleContainer.setAttribute('position', `${data.percent*2-1} 0 0.03`);
             var guiInteractable = el.getAttribute("gui-interactable");
-            console.log("guiInteractable: "+guiInteractable);
+           //console.log("guiInteractable: "+guiInteractable);
             var clickActionFunctionName = guiInteractable.clickAction;
-            console.log("clickActionFunctionName: "+clickActionFunctionName);
+           //console.log("clickActionFunctionName: "+clickActionFunctionName);
             // find object
             var clickActionFunction = window[clickActionFunctionName];
             //console.log("clickActionFunction: "+clickActionFunction);

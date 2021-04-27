@@ -38,7 +38,7 @@ AFRAME.registerComponent('gui-vertical-slider', {
         el.setAttribute('geometry', `primitive: plane; height: ${guiItem.height}; width: ${guiItem.width};`);
         el.setAttribute('material', `shader: flat; opacity: ${data.opacity};  alphaTest: 0.5; color: ${data.backgroundColor}; side:front;`);
 
-        console.log('**** in vertical slider init, percent: ' + data.percent + ', sliderHeight: ' + sliderHeight);
+       //console.log('**** in vertical slider init, percent: ' + data.percent + ', sliderHeight: ' + sliderHeight);
         var sliderActiveBar = document.createElement("a-entity");
         sliderActiveBar.setAttribute('geometry', `primitive: box; height: ${data.percent*sliderHeight}; width: ${data.sliderBarWidth}; depth: ${data.sliderBarDepth};`);
         sliderActiveBar.setAttribute('material', `shader: flat; opacity: 1; side:double; color: ${data.activeColor};`);
@@ -111,10 +111,10 @@ AFRAME.registerComponent('gui-vertical-slider', {
         });
 
         el.addEventListener('click', function (evt) {
-           // console.log('I was clicked at: ', evt.detail.intersection.point);
+           ////console.log('I was clicked at: ', evt.detail.intersection.point);
             var localCoordinates = el.object3D.worldToLocal(evt.detail.intersection.point);
-            console.log('click local coordinates: ', localCoordinates);
-            console.log('current percent: '+data.percent);
+           //console.log('click local coordinates: ', localCoordinates);
+           //console.log('current percent: '+data.percent);
             var newPercent = null;
             if (localCoordinates.y <= (-sliderHeight / 2)) {
                 newPercent = 0;
@@ -123,14 +123,14 @@ AFRAME.registerComponent('gui-vertical-slider', {
             } else {
                 newPercent = (localCoordinates.y + (sliderHeight /2)) / sliderHeight;
             }
-            console.log('new percent: '+newPercent);
+           //console.log('new percent: '+newPercent);
             el.setAttribute('gui-vertical-slider', 'percent', String(newPercent));
             el.setAttribute('gui-vertical-slider', 'hoverPercent', String(newPercent));
-            console.log("handle container: "+handleContainer);
+           //console.log("handle container: "+handleContainer);
             var guiInteractable = el.getAttribute("gui-interactable");
-            console.log("guiInteractable: "+guiInteractable);
+           //console.log("guiInteractable: "+guiInteractable);
             var clickActionFunctionName = guiInteractable.clickAction;
-            console.log("clickActionFunctionName: "+clickActionFunctionName);
+           //console.log("clickActionFunctionName: "+clickActionFunctionName);
             // find object
             var clickActionFunction = window[clickActionFunctionName];
             //console.log("clickActionFunction: "+clickActionFunction);
@@ -139,11 +139,11 @@ AFRAME.registerComponent('gui-vertical-slider', {
         });
 
         this.el.addEventListener('raycaster-intersected', evt => {
-           // console.log('***** in raycaster-intersected');
+           ////console.log('***** in raycaster-intersected');
             this.raycaster = evt.detail.el;
         });
         this.el.addEventListener('raycaster-intersected-cleared', evt => {
-           // console.log('****** in raycaster-intersected-cleared');
+           ////console.log('****** in raycaster-intersected-cleared');
             this.raycaster = null;
             this.hoverIndicator.setAttribute('visible', false);
             this.hoverLabel.setAttribute('visible', false);
@@ -192,7 +192,7 @@ AFRAME.registerComponent('gui-vertical-slider', {
         if (!intersection) {
             return;
         } else {
-         //  console.log('1: hover intersection point: ' + JSON.stringify(intersection.point));
+         // //console.log('1: hover intersection point: ' + JSON.stringify(intersection.point));
            if (this.previousLocalY && this.previousLocalY == intersection.point.y) {
                this.hoverIndicator.setAttribute('visible', false);
                this.hoverLabel.setAttribute('visible', false);
@@ -207,13 +207,13 @@ AFRAME.registerComponent('gui-vertical-slider', {
 
             mesh.matrixWorld.decompose(pos, rot, scale);
 
-          // console.log('2: hover world position: ' + JSON.stringify(pos));
+          ////console.log('2: hover world position: ' + JSON.stringify(pos));
             var localCoordinates = new THREE.Vector3();
             localCoordinates.x = intersection.point.x - pos.x;
             localCoordinates.y = intersection.point.y - pos.y;
             localCoordinates.z = intersection.point.z - pos.z;
             this.previousLocalY = localCoordinates.y;
-        //    console.log('3: hover local position: ' + JSON.stringify(localCoordinates));
+        //   //console.log('3: hover local position: ' + JSON.stringify(localCoordinates));
             // var localCoordinates = el.object3D.worldToLocal(intersection.point);
               //console.log('local coordinates: ', localCoordinates);
               //console.log('current percent: '+data.percent);

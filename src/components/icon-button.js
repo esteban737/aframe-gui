@@ -67,13 +67,13 @@ AFRAME.registerComponent('gui-icon-button', {
                 buttonEntity.setAttribute('animation__click', `property: material.color; from: ${data.activeColor}; to:${data.backgroundColor}; dur:400; easing: easeOutQuad;`);
             }else{
                 var guiButton = el.components['gui-button']
-                // console.log("about to toggle, current state: " + guiButton.data.toggleState);
+                ////console.log("about to toggle, current state: " + guiButton.data.toggleState);
                 guiButton.setActiveState(!guiButton.data.toggleState);
                //  buttonEntity.setAttribute('material', 'color', data.activeColor);
             }
 
             var clickActionFunctionName = guiInteractable.clickAction;
-            // console.log("in button, clickActionFunctionName: "+clickActionFunctionName);
+            ////console.log("in button, clickActionFunctionName: "+clickActionFunctionName);
             // find object
             var clickActionFunction = window[clickActionFunctionName];
             //console.log("clickActionFunction: "+clickActionFunction);
@@ -89,12 +89,12 @@ AFRAME.registerComponent('gui-icon-button', {
 
     },
     update: function (oldData) {
-        console.log("In button update, toggle: "+this.toggleState);
+       //console.log("In button update, toggle: "+this.toggleState);
         var data = this.data;
         var el = this.el;
 
         if(this.iconEntity){
-            console.log("has iconEntity: "+this.iconEntity);
+           //console.log("has iconEntity: "+this.iconEntity);
 
             var oldEntity = this.iconEntity;
             oldEntity.parentNode.removeChild(oldEntity);
@@ -102,17 +102,17 @@ AFRAME.registerComponent('gui-icon-button', {
             this.setIcon(this.data.icon);
    
         }else{
-            console.log("no iconEntity!");   
+           //console.log("no iconEntity!");   
         }        
     },
     setActiveState: function (activeState) {
-        // console.log("in setActiveState function, new state: " + activeState);
+        ////console.log("in setActiveState function, new state: " + activeState);
         this.data.toggleState = activeState;
         if (!activeState) {
-            console.log('not active, about to set background color');
+           //console.log('not active, about to set background color');
             this.buttonEntity.setAttribute('material', 'color', this.data.backgroundColor);
         } else {
-            console.log('active, about to set active color');
+           //console.log('active, about to set active color');
             this.buttonEntity.setAttribute('material', 'color', this.data.activeColor);
         }
     },

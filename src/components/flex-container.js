@@ -32,11 +32,11 @@ var styles = StyleSheet.create({
 */
 
 var onAppendChildToContainer = function(elem, f) {
-   // console.log("in onAppend, elem: "+elem);
+   ////console.log("in onAppend, elem: "+elem);
   var observer = new MutationObserver(function(mutations, me) {
       //console.log("in mutationObserver, me: "+me);
       mutations.forEach(function(m) {
-        console.log(m);
+       //console.log(m);
         if (m.addedNodes.length) {
             f(m.target, m.addedNodes)
         }
@@ -69,7 +69,7 @@ AFRAME.registerComponent('gui-flex-container', {
 
     },
     init: function () {
-        console.log("in aframe-gui-component init for: "+this.el.getAttribute("id"));
+       //console.log("in aframe-gui-component init for: "+this.el.getAttribute("id"));
         var containerGuiItem = this.el.getAttribute("gui-item");
 
         if (this.data.isTopContainer) {
@@ -208,12 +208,12 @@ AFRAME.registerComponent('gui-flex-container', {
     getElementSize: function () {},
     setBackground: function () {
         if (this.data.opacity > 0) {
-            console.log("panel position: " + JSON.stringify(this.el.getAttribute("position")));
+           //console.log("panel position: " + JSON.stringify(this.el.getAttribute("position")));
             var guiItem = this.el.getAttribute("gui-item");
             var panelBackground = document.createElement("a-entity");
             panelBackground.setAttribute('rounded', `height: ${guiItem.height}; width: ${guiItem.width}; opacity: ${this.data.opacity}; color: ${this.data.panelColor}; radius:${this.data.panelRounded}; depthWrite:false; polygonOffset:true; polygonOffsetFactor: 2;`);
 //            panelBackground.setAttribute('geometry', `primitive: box; height: ${guiItem.height}; width: ${guiItem.width}; depth:0.025;`);
-            console.log("about to set panel background color to: : " + this.data.panelColor);
+           //console.log("about to set panel background color to: : " + this.data.panelColor);
 //            panelBackground.setAttribute('material', `shader: standard; depthTest: true; opacity: ${this.data.opacity}; color: ${this.data.panelColor};`);
             panelBackground.setAttribute('position', this.el.getAttribute("position").x + ' ' + this.el.getAttribute("position").y + ' ' + (this.el.getAttribute("position").z - 0.0125));
             panelBackground.setAttribute('rotation', this.el.getAttribute("rotation").x + ' ' + this.el.getAttribute("rotation").y + ' ' + this.el.getAttribute("rotation").z);

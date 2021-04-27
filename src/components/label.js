@@ -42,7 +42,7 @@ AFRAME.registerComponent('gui-label', {
         var el = this.el;
 
         if(this.textEntity){
-            console.log("has textEntity: "+this.textEntity);
+           //console.log("has textEntity: "+this.textEntity);
 
             var oldEntity = this.textEntity;
             oldEntity.parentNode.removeChild(oldEntity);
@@ -50,7 +50,7 @@ AFRAME.registerComponent('gui-label', {
             this.setText(this.data.value);
    
         }else{
-            console.log("no textEntity!");   
+           //console.log("no textEntity!");   
         }
     },
     setText: function (newText) {

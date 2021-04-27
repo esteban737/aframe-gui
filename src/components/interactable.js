@@ -12,12 +12,12 @@ AFRAME.registerComponent('gui-interactable', {
 
         if(data.keyCode > 0){
             window.addEventListener("keydown", function (event) {
-               // console.log('in keydown handler, event key: ' + event.key);
+               ////console.log('in keydown handler, event key: ' + event.key);
                 if(event.key == data.key){
-                //    console.log("key press by gui-interactable, key: " + data.key);
+                //   //console.log("key press by gui-interactable, key: " + data.key);
                     el.emit('click');
                 } else if (event.keyCode == data.keyCode){
-                //    console.log("key press by gui-interactable, keyCode: " + data.keyCode);
+                //   //console.log("key press by gui-interactable, keyCode: " + data.keyCode);
                     el.emit('click');
                 }
                 event.preventDefault();

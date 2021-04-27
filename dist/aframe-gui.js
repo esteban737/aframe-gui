@@ -307,13 +307,13 @@ AFRAME.registerComponent('gui-button', {
                 buttonEntity.setAttribute('animation__click', 'property: material.color; from: ' + data.activeColor + '; to:' + data.backgroundColor + '; dur:400; easing: easeOutQuad;');
             } else {
                 var guiButton = el.components['gui-button'];
-                // console.log("about to toggle, current state: " + guiButton.data.toggleState);
+                ////console.log("about to toggle, current state: " + guiButton.data.toggleState);
                 guiButton.setActiveState(!guiButton.data.toggleState);
                 //  buttonEntity.setAttribute('material', 'color', data.activeColor);
             }
 
             var clickActionFunctionName = guiInteractable.clickAction;
-            // console.log("in button, clickActionFunctionName: "+clickActionFunctionName);
+            ////console.log("in button, clickActionFunctionName: "+clickActionFunctionName);
             // find object
             var clickActionFunction = window[clickActionFunctionName];
             //console.log("clickActionFunction: "+clickActionFunction);
@@ -371,24 +371,24 @@ AFRAME.registerComponent('gui-button', {
         this.buttonEntity.setAttribute('material', 'shader: flat; \n                                                    opacity: 1; \n                                                    side:double; \n                                                    color: ' + (data.toggleState ? data.activeColor : data.backgroundColor) + '\n                                                    ');
 
         if (this.textEntity) {
-            console.log("has textEntity: " + this.textEntity);
+           //console.log("has textEntity: " + this.textEntity);
 
             var oldEntity = this.textEntity;
             oldEntity.parentNode.removeChild(oldEntity);
 
             this.setText(this.data.value);
         } else {
-            console.log("no textEntity!");
+           //console.log("no textEntity!");
         }
     },
     setActiveState: function setActiveState(activeState) {
-        // console.log("in setActiveState function, new state: " + activeState);
+        ////console.log("in setActiveState function, new state: " + activeState);
         this.data.toggleState = activeState;
         if (!activeState) {
-            console.log('not active, about to set background color');
+           //console.log('not active, about to set background color');
             this.buttonEntity.setAttribute('material', 'color', this.data.backgroundColor);
         } else {
-            console.log('active, about to set active color');
+           //console.log('active, about to set active color');
             this.buttonEntity.setAttribute('material', 'color', this.data.activeColor);
         }
     },
@@ -520,14 +520,14 @@ AFRAME.registerComponent('gui-circle-loader', {
         var el = this.el;
 
         if (this.textEntity) {
-            console.log("has textEntity: " + this.textEntity);
+           //console.log("has textEntity: " + this.textEntity);
 
             var oldEntity = this.textEntity;
             oldEntity.parentNode.removeChild(oldEntity);
 
             this.setText(this.data.loaded);
         } else {
-            console.log("no textEntity!");
+           //console.log("no textEntity!");
         }
     },
     setText: function setText(newLoaded) {
@@ -584,7 +584,7 @@ AFRAME.registerComponent('gui-circle-timer', {
         var guiItem = el.getAttribute("gui-item");
         this.guiItem = guiItem;
         var guiInteractable = el.getAttribute("gui-interactable");
-        console.log("in timer callback, guiInteractable: " + JSON.stringify(guiInteractable));
+       //console.log("in timer callback, guiInteractable: " + JSON.stringify(guiInteractable));
 
         //fallback for old font-sizing
         if (data.fontSize > 20) {
@@ -666,7 +666,7 @@ AFRAME.registerComponent('gui-circle-timer', {
             this.textEntity.setAttribute('troika-text', 'value: ' + data.countDown + ';');
 
             if (left == 1) {
-                console.log('fire callback on the last second');
+               //console.log('fire callback on the last second');
             }
         }
     },
@@ -686,8 +686,8 @@ AFRAME.registerComponent('gui-circle-timer', {
     callback: function callback() {
         var guiInteractable = this.el.getAttribute("gui-interactable");
         var clickActionFunctionName = guiInteractable.clickAction;
-        console.log("in timer callback, guiInteractable: " + JSON.stringify(guiInteractable));
-        console.log("in button, clickActionFunctionName: " + clickActionFunctionName);
+       //console.log("in timer callback, guiInteractable: " + JSON.stringify(guiInteractable));
+       //console.log("in button, clickActionFunctionName: " + clickActionFunctionName);
         // find object
         var clickActionFunction = window[clickActionFunctionName];
         //console.log("clickActionFunction: "+clickActionFunction);
@@ -745,7 +745,7 @@ AFRAME.registerComponent('gui-cursor', {
 
         AFRAME.utils.entity.setComponentProperty(el, 'raycaster.interval', '500');
 
-        console.log("fuse: " + fuse + ", fuseTimeout: " + fuseTimeout);
+       //console.log("fuse: " + fuse + ", fuseTimeout: " + fuseTimeout);
 
         if (data.design == 'dot') {
 
@@ -991,7 +991,7 @@ AFRAME.registerComponent('gui-cursor', {
         }
 
         el.addEventListener('mouseenter', function () {
-            console.log("in gui-cursor mousenter, el: " + el);
+           //console.log("in gui-cursor mousenter, el: " + el);
             el.emit('hovergui');
             if (data.design == 'dot' || data.design == 'ring') {
                 cursorShadow.emit('hovergui');
@@ -1009,7 +1009,7 @@ AFRAME.registerComponent('gui-cursor', {
         });
 
         el.addEventListener('mouseleave', function () {
-            console.log("in gui-cursor mouseleave, el: " + el);
+           //console.log("in gui-cursor mouseleave, el: " + el);
             el.emit('leavegui');
             if (data.design == 'dot' || data.design == 'ring') {
                 cursorShadow.emit('leavegui');
@@ -1039,7 +1039,7 @@ AFRAME.registerComponent('gui-cursor', {
         }
 
         el.addEventListener("stateremoved", function (evt) {
-            console.log("evt.detail " + evt.detail);
+           //console.log("evt.detail " + evt.detail);
             if (evt.detail.state === 'cursor-fusing' || evt.detail === 'cursor-fusing') {
                 if (data.design == 'dot' || data.design == 'ring' || data.design == 'cross') {
                     if (fuse) {
@@ -1151,11 +1151,11 @@ var styles = StyleSheet.create({
 */
 
 var onAppendChildToContainer = function onAppendChildToContainer(elem, f) {
-    // console.log("in onAppend, elem: "+elem);
+    ////console.log("in onAppend, elem: "+elem);
     var observer = new MutationObserver(function (mutations, me) {
         //console.log("in mutationObserver, me: "+me);
         mutations.forEach(function (m) {
-            console.log(m);
+           //console.log(m);
             if (m.addedNodes.length) {
                 f(m.target, m.addedNodes);
             }
@@ -1188,7 +1188,7 @@ AFRAME.registerComponent('gui-flex-container', {
 
     },
     init: function init() {
-        console.log("in aframe-gui-component init for: " + this.el.getAttribute("id"));
+       //console.log("in aframe-gui-component init for: " + this.el.getAttribute("id"));
         var containerGuiItem = this.el.getAttribute("gui-item");
 
         if (this.data.isTopContainer) {
@@ -1326,12 +1326,12 @@ AFRAME.registerComponent('gui-flex-container', {
     getElementSize: function getElementSize() {},
     setBackground: function setBackground() {
         if (this.data.opacity > 0) {
-            console.log("panel position: " + JSON.stringify(this.el.getAttribute("position")));
+           //console.log("panel position: " + JSON.stringify(this.el.getAttribute("position")));
             var guiItem = this.el.getAttribute("gui-item");
             var panelBackground = document.createElement("a-entity");
             panelBackground.setAttribute('rounded', 'height: ' + guiItem.height + '; width: ' + guiItem.width + '; opacity: ' + this.data.opacity + '; color: ' + this.data.panelColor + '; radius:' + this.data.panelRounded + '; depthWrite:false; polygonOffset:true; polygonOffsetFactor: 2;');
             //            panelBackground.setAttribute('geometry', `primitive: box; height: ${guiItem.height}; width: ${guiItem.width}; depth:0.025;`);
-            console.log("about to set panel background color to: : " + this.data.panelColor);
+           //console.log("about to set panel background color to: : " + this.data.panelColor);
             //            panelBackground.setAttribute('material', `shader: standard; depthTest: true; opacity: ${this.data.opacity}; color: ${this.data.panelColor};`);
             panelBackground.setAttribute('position', this.el.getAttribute("position").x + ' ' + this.el.getAttribute("position").y + ' ' + (this.el.getAttribute("position").z - 0.0125));
             panelBackground.setAttribute('rotation', this.el.getAttribute("rotation").x + ' ' + this.el.getAttribute("rotation").y + ' ' + this.el.getAttribute("rotation").z);
@@ -1446,13 +1446,13 @@ AFRAME.registerComponent('gui-icon-button', {
                 buttonEntity.setAttribute('animation__click', 'property: material.color; from: ' + data.activeColor + '; to:' + data.backgroundColor + '; dur:400; easing: easeOutQuad;');
             } else {
                 var guiButton = el.components['gui-button'];
-                // console.log("about to toggle, current state: " + guiButton.data.toggleState);
+                ////console.log("about to toggle, current state: " + guiButton.data.toggleState);
                 guiButton.setActiveState(!guiButton.data.toggleState);
                 //  buttonEntity.setAttribute('material', 'color', data.activeColor);
             }
 
             var clickActionFunctionName = guiInteractable.clickAction;
-            // console.log("in button, clickActionFunctionName: "+clickActionFunctionName);
+            ////console.log("in button, clickActionFunctionName: "+clickActionFunctionName);
             // find object
             var clickActionFunction = window[clickActionFunctionName];
             //console.log("clickActionFunction: "+clickActionFunction);
@@ -1464,29 +1464,29 @@ AFRAME.registerComponent('gui-icon-button', {
     },
     play: function play() {},
     update: function update(oldData) {
-        console.log("In button update, toggle: " + this.toggleState);
+       //console.log("In button update, toggle: " + this.toggleState);
         var data = this.data;
         var el = this.el;
 
         if (this.iconEntity) {
-            console.log("has iconEntity: " + this.iconEntity);
+           //console.log("has iconEntity: " + this.iconEntity);
 
             var oldEntity = this.iconEntity;
             oldEntity.parentNode.removeChild(oldEntity);
 
             this.setIcon(this.data.icon);
         } else {
-            console.log("no iconEntity!");
+           //console.log("no iconEntity!");
         }
     },
     setActiveState: function setActiveState(activeState) {
-        // console.log("in setActiveState function, new state: " + activeState);
+        ////console.log("in setActiveState function, new state: " + activeState);
         this.data.toggleState = activeState;
         if (!activeState) {
-            console.log('not active, about to set background color');
+           //console.log('not active, about to set background color');
             this.buttonEntity.setAttribute('material', 'color', this.data.backgroundColor);
         } else {
-            console.log('active, about to set active color');
+           //console.log('active, about to set active color');
             this.buttonEntity.setAttribute('material', 'color', this.data.activeColor);
         }
     },
@@ -1625,13 +1625,13 @@ AFRAME.registerComponent('gui-icon-label-button', {
                 buttonEntity.setAttribute('animation__click', 'property: material.color; from: ' + data.activeColor + '; to:' + data.backgroundColor + '; dur:400; easing: easeOutQuad;');
             } else {
                 var guiButton = el.components['gui-button'];
-                // console.log("about to toggle, current state: " + guiButton.data.toggleState);
+                ////console.log("about to toggle, current state: " + guiButton.data.toggleState);
                 guiButton.setActiveState(!guiButton.data.toggleState);
                 //  buttonEntity.setAttribute('material', 'color', data.activeColor);
             }
 
             var clickActionFunctionName = guiInteractable.clickAction;
-            // console.log("in button, clickActionFunctionName: "+clickActionFunctionName);
+            ////console.log("in button, clickActionFunctionName: "+clickActionFunctionName);
             // find object
             var clickActionFunction = window[clickActionFunctionName];
             //console.log("clickActionFunction: "+clickActionFunction);
@@ -1644,40 +1644,40 @@ AFRAME.registerComponent('gui-icon-label-button', {
     },
     play: function play() {},
     update: function update(oldData) {
-        console.log("In button update, toggle: " + this.toggleState);
+       //console.log("In button update, toggle: " + this.toggleState);
         var data = this.data;
         var el = this.el;
 
         if (this.iconEntity) {
-            console.log("has iconEntity: " + this.iconEntity);
+           //console.log("has iconEntity: " + this.iconEntity);
 
             var oldEntity = this.iconEntity;
             oldEntity.parentNode.removeChild(oldEntity);
 
             this.setIcon(this.data.icon);
         } else {
-            console.log("no iconEntity!");
+           //console.log("no iconEntity!");
         }
 
         if (this.textEntity) {
-            console.log("has textEntity: " + this.textEntity);
+           //console.log("has textEntity: " + this.textEntity);
 
             var oldEntity = this.textEntity;
             oldEntity.parentNode.removeChild(oldEntity);
 
             this.setText(this.data.value);
         } else {
-            console.log("no textEntity!");
+           //console.log("no textEntity!");
         }
     },
     setActiveState: function setActiveState(activeState) {
-        // console.log("in setActiveState function, new state: " + activeState);
+        ////console.log("in setActiveState function, new state: " + activeState);
         this.data.toggleState = activeState;
         if (!activeState) {
-            console.log('not active, about to set background color');
+           //console.log('not active, about to set background color');
             this.buttonEntity.setAttribute('material', 'color', this.data.backgroundColor);
         } else {
-            console.log('active, about to set active color');
+           //console.log('active, about to set active color');
             this.buttonEntity.setAttribute('material', 'color', this.data.activeColor);
         }
     },
@@ -1828,11 +1828,11 @@ AFRAME.registerComponent('gui-input', {
         });
 
         el.addEventListener(data.on, function (evt) {
-            console.log('I was clicked at: ', evt.detail.intersection.point);
+           //console.log('I was clicked at: ', evt.detail.intersection.point);
             var guiInteractable = el.getAttribute("gui-interactable");
-            console.log("guiInteractable: " + guiInteractable);
+           //console.log("guiInteractable: " + guiInteractable);
             var clickActionFunctionName = guiInteractable.clickAction;
-            console.log("clickActionFunctionName: " + clickActionFunctionName);
+           //console.log("clickActionFunctionName: " + clickActionFunctionName);
             // find object
             var clickActionFunction = window[clickActionFunctionName];
             //console.log("clickActionFunction: "+clickActionFunction);
@@ -1915,12 +1915,12 @@ AFRAME.registerComponent('gui-interactable', {
 
         if (data.keyCode > 0) {
             window.addEventListener("keydown", function (event) {
-                // console.log('in keydown handler, event key: ' + event.key);
+                ////console.log('in keydown handler, event key: ' + event.key);
                 if (event.key == data.key) {
-                    //    console.log("key press by gui-interactable, key: " + data.key);
+                    //   //console.log("key press by gui-interactable, key: " + data.key);
                     el.emit('click');
                 } else if (event.keyCode == data.keyCode) {
-                    //    console.log("key press by gui-interactable, keyCode: " + data.keyCode);
+                    //   //console.log("key press by gui-interactable, keyCode: " + data.keyCode);
                     el.emit('click');
                 }
                 event.preventDefault();
@@ -2022,14 +2022,14 @@ AFRAME.registerComponent('gui-label', {
     var el = this.el;
 
     if (this.textEntity) {
-      console.log("has textEntity: " + this.textEntity);
+     //console.log("has textEntity: " + this.textEntity);
 
       var oldEntity = this.textEntity;
       oldEntity.parentNode.removeChild(oldEntity);
 
       this.setText(this.data.value);
     } else {
-      console.log("no textEntity!");
+     //console.log("no textEntity!");
     }
   },
   setText: function setText(newText) {
@@ -2203,7 +2203,7 @@ AFRAME.registerComponent('gui-radio', {
             radioborder.setAttribute('animation__leave', 'property: material.color; from: ' + data.hoverColor + '; to:' + data.borderColor + '; dur:200; easing: easeOutQuad;');
         });
         el.addEventListener(data.on, function (evt) {
-            // console.log('I was clicked at: ', evt.detail.intersection.point); // Commented out to use own made click event without defining detail
+            ////console.log('I was clicked at: ', evt.detail.intersection.point); // Commented out to use own made click event without defining detail
             data.checked = !data.checked;
             if (data.checked) {
                 radioCenter.removeAttribute('animation__colorOut');
@@ -2245,14 +2245,14 @@ AFRAME.registerComponent('gui-radio', {
         this.updateToggle(data.active);
 
         if (this.textEntity) {
-            console.log("has textEntity: " + this.textEntity);
+           //console.log("has textEntity: " + this.textEntity);
 
             var oldEntity = this.textEntity;
             oldEntity.parentNode.removeChild(oldEntity);
 
             this.setText(this.data.value);
         } else {
-            console.log("no textEntity!");
+           //console.log("no textEntity!");
         }
     },
 
@@ -2502,10 +2502,10 @@ AFRAME.registerComponent('gui-slider', {
         });
 
         el.addEventListener('click', function (evt) {
-            console.log('I was clicked at: ', evt.detail.intersection.point);
+           //console.log('I was clicked at: ', evt.detail.intersection.point);
             var localCoordinates = el.object3D.worldToLocal(evt.detail.intersection.point);
-            console.log('local coordinates: ', localCoordinates);
-            console.log('current percent: ' + data.percent);
+           //console.log('local coordinates: ', localCoordinates);
+           //console.log('current percent: ' + data.percent);
             var sliderBarWidth = 2; // total width of slider bar
             if (localCoordinates.x <= -sliderBarWidth / 2) {
                 data.percent = 0;
@@ -2514,16 +2514,16 @@ AFRAME.registerComponent('gui-slider', {
             } else {
                 data.percent = (localCoordinates.x + sliderBarWidth / 2) / sliderBarWidth;
             }
-            console.log("handle container: " + handleContainer);
+           //console.log("handle container: " + handleContainer);
             sliderActiveBar.setAttribute('geometry', 'primitive: box; width: ' + data.percent * 2 + '; height: 0.05; depth: 0.03;');
             sliderActiveBar.setAttribute('position', data.percent - 1 + ' 0 0.02');
             sliderBar.setAttribute('geometry', 'primitive: box; width: ' + (2 - data.percent * 2) + '; height: 0.05; depth: 0.03;');
             sliderBar.setAttribute('position', data.percent * 1 + ' 0 0.02');
             handleContainer.setAttribute('position', data.percent * 2 - 1 + ' 0 0.03');
             var guiInteractable = el.getAttribute("gui-interactable");
-            console.log("guiInteractable: " + guiInteractable);
+           //console.log("guiInteractable: " + guiInteractable);
             var clickActionFunctionName = guiInteractable.clickAction;
-            console.log("clickActionFunctionName: " + clickActionFunctionName);
+           //console.log("clickActionFunctionName: " + clickActionFunctionName);
             // find object
             var clickActionFunction = window[clickActionFunctionName];
             //console.log("clickActionFunction: "+clickActionFunction);
@@ -2662,7 +2662,7 @@ AFRAME.registerComponent('gui-toggle', {
         });
 
         el.addEventListener(data.on, function (evt) {
-            console.log('I was clicked at: ', evt.detail.intersection.point);
+           //console.log('I was clicked at: ', evt.detail.intersection.point);
             data.checked = !data.checked;
             if (data.checked) {
                 toggleBox.removeAttribute('animation__colorOut');
@@ -2676,9 +2676,9 @@ AFRAME.registerComponent('gui-toggle', {
                 toggleHandle.setAttribute('animation__positionOut', 'property: position; from: ' + toggleHandleXEnd + ' 0 0.02; to:' + toggleHandleXStart + ' 0 0.02; dur:200; easing:easeInOutCubic;');
             }
             var guiInteractable = el.getAttribute("gui-interactable");
-            console.log("guiInteractable: " + guiInteractable);
+           //console.log("guiInteractable: " + guiInteractable);
             var clickActionFunctionName = guiInteractable.clickAction;
-            console.log("clickActionFunctionName: " + clickActionFunctionName);
+           //console.log("clickActionFunctionName: " + clickActionFunctionName);
             // find object
             var clickActionFunction = window[clickActionFunctionName];
             //console.log("clickActionFunction: "+clickActionFunction);
@@ -2692,14 +2692,14 @@ AFRAME.registerComponent('gui-toggle', {
         this.updateToggle(data.active);
 
         if (this.textEntity) {
-            console.log("has textEntity: " + this.textEntity);
+           //console.log("has textEntity: " + this.textEntity);
 
             var oldEntity = this.textEntity;
             oldEntity.parentNode.removeChild(oldEntity);
 
             this.setText(this.data.value);
         } else {
-            console.log("no textEntity!");
+           //console.log("no textEntity!");
         }
     },
 
@@ -2797,7 +2797,7 @@ AFRAME.registerComponent('gui-vertical-slider', {
         el.setAttribute('geometry', 'primitive: plane; height: ' + guiItem.height + '; width: ' + guiItem.width + ';');
         el.setAttribute('material', 'shader: flat; opacity: ' + data.opacity + ';  alphaTest: 0.5; color: ' + data.backgroundColor + '; side:front;');
 
-        console.log('**** in vertical slider init, percent: ' + data.percent + ', sliderHeight: ' + sliderHeight);
+       //console.log('**** in vertical slider init, percent: ' + data.percent + ', sliderHeight: ' + sliderHeight);
         var sliderActiveBar = document.createElement("a-entity");
         sliderActiveBar.setAttribute('geometry', 'primitive: box; height: ' + data.percent * sliderHeight + '; width: ' + data.sliderBarWidth + '; depth: ' + data.sliderBarDepth + ';');
         sliderActiveBar.setAttribute('material', 'shader: flat; opacity: 1; side:double; color: ' + data.activeColor + ';');
@@ -2870,10 +2870,10 @@ AFRAME.registerComponent('gui-vertical-slider', {
         });
 
         el.addEventListener('click', function (evt) {
-            // console.log('I was clicked at: ', evt.detail.intersection.point);
+            ////console.log('I was clicked at: ', evt.detail.intersection.point);
             var localCoordinates = el.object3D.worldToLocal(evt.detail.intersection.point);
-            console.log('click local coordinates: ', localCoordinates);
-            console.log('current percent: ' + data.percent);
+           //console.log('click local coordinates: ', localCoordinates);
+           //console.log('current percent: ' + data.percent);
             var newPercent = null;
             if (localCoordinates.y <= -sliderHeight / 2) {
                 newPercent = 0;
@@ -2882,14 +2882,14 @@ AFRAME.registerComponent('gui-vertical-slider', {
             } else {
                 newPercent = (localCoordinates.y + sliderHeight / 2) / sliderHeight;
             }
-            console.log('new percent: ' + newPercent);
+           //console.log('new percent: ' + newPercent);
             el.setAttribute('gui-vertical-slider', 'percent', String(newPercent));
             el.setAttribute('gui-vertical-slider', 'hoverPercent', String(newPercent));
-            console.log("handle container: " + handleContainer);
+           //console.log("handle container: " + handleContainer);
             var guiInteractable = el.getAttribute("gui-interactable");
-            console.log("guiInteractable: " + guiInteractable);
+           //console.log("guiInteractable: " + guiInteractable);
             var clickActionFunctionName = guiInteractable.clickAction;
-            console.log("clickActionFunctionName: " + clickActionFunctionName);
+           //console.log("clickActionFunctionName: " + clickActionFunctionName);
             // find object
             var clickActionFunction = window[clickActionFunctionName];
             //console.log("clickActionFunction: "+clickActionFunction);
@@ -2898,11 +2898,11 @@ AFRAME.registerComponent('gui-vertical-slider', {
         });
 
         this.el.addEventListener('raycaster-intersected', function (evt) {
-            // console.log('***** in raycaster-intersected');
+            ////console.log('***** in raycaster-intersected');
             _this.raycaster = evt.detail.el;
         });
         this.el.addEventListener('raycaster-intersected-cleared', function (evt) {
-            // console.log('****** in raycaster-intersected-cleared');
+            ////console.log('****** in raycaster-intersected-cleared');
             _this.raycaster = null;
             _this.hoverIndicator.setAttribute('visible', false);
             _this.hoverLabel.setAttribute('visible', false);
@@ -2951,7 +2951,7 @@ AFRAME.registerComponent('gui-vertical-slider', {
         if (!intersection) {
             return;
         } else {
-            //  console.log('1: hover intersection point: ' + JSON.stringify(intersection.point));
+            // //console.log('1: hover intersection point: ' + JSON.stringify(intersection.point));
             if (this.previousLocalY && this.previousLocalY == intersection.point.y) {
                 this.hoverIndicator.setAttribute('visible', false);
                 this.hoverLabel.setAttribute('visible', false);
@@ -2966,13 +2966,13 @@ AFRAME.registerComponent('gui-vertical-slider', {
 
             mesh.matrixWorld.decompose(pos, rot, scale);
 
-            // console.log('2: hover world position: ' + JSON.stringify(pos));
+            ////console.log('2: hover world position: ' + JSON.stringify(pos));
             var localCoordinates = new THREE.Vector3();
             localCoordinates.x = intersection.point.x - pos.x;
             localCoordinates.y = intersection.point.y - pos.y;
             localCoordinates.z = intersection.point.z - pos.z;
             this.previousLocalY = localCoordinates.y;
-            //    console.log('3: hover local position: ' + JSON.stringify(localCoordinates));
+            //   //console.log('3: hover local position: ' + JSON.stringify(localCoordinates));
             // var localCoordinates = el.object3D.worldToLocal(intersection.point);
             //console.log('local coordinates: ', localCoordinates);
             //console.log('current percent: '+data.percent);
@@ -3645,7 +3645,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         supported = true;
       } catch (err) {
         if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') ;else {
-          console.log("Troika createWorkerModule: web workers not allowed; falling back to main thread execution. Cause: [" + err.message + "]");
+         //console.log("Troika createWorkerModule: web workers not allowed; falling back to main thread execution. Cause: [" + err.message + "]");
         }
       }
     }
@@ -5194,13 +5194,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         var length = bin.readUint(data, offset);offset += 4;
         tabs[tag] = { offset: toffset, length: length };
 
-        //if(tags.indexOf(tag)==-1) console.log("unknown tag", tag, length);
+        //if(tags.indexOf(tag)==-1)//console.log("unknown tag", tag, length);
       }
 
       for (var i = 0; i < tags.length; i++) {
         var t = tags[i];
         //console.log(t);
-        //if(tabs[t]) console.log(t, tabs[t].offset, tabs[t].length);
+        //if(tabs[t])//console.log(t, tabs[t].offset, tabs[t].length);
         if (tabs[t]) obj[t.trim()] = Typr[t.trim()].parse(data, tabs[t].offset, tabs[t].length, obj);
       }
 
@@ -5931,7 +5931,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           var subt;
           offs.push(noffset);
           var format = bin.readUshort(data, noffset);
-          if (format == 0) subt = Typr.cmap.parse0(data, noffset);else if (format == 4) subt = Typr.cmap.parse4(data, noffset);else if (format == 6) subt = Typr.cmap.parse6(data, noffset);else if (format == 12) subt = Typr.cmap.parse12(data, noffset);else console.log("unknown format: " + format, platformID, encodingID, noffset);
+          if (format == 0) subt = Typr.cmap.parse0(data, noffset);else if (format == 4) subt = Typr.cmap.parse4(data, noffset);else if (format == 6) subt = Typr.cmap.parse6(data, noffset);else if (format == 12) subt = Typr.cmap.parse12(data, noffset);else//console.log("unknown format: " + format, platformID, encodingID, noffset);
           obj.tables.push(subt);
         }
 
@@ -6294,7 +6294,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                 tab.scset.push(scsOff == 0 ? null : Typr.GSUB.readSubClassSet(data, offset0 + scsOff));
               }
             }
-            //else console.log("unknown table format", tab.fmt);
+            //else//console.log("unknown table format", tab.fmt);
           }
           //*
           else if (ltype == 6) {
@@ -6332,7 +6332,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               }
               //console.log(tab);
             } //*/
-      //if(tab.coverage.indexOf(3)!=-1) console.log(ltype, fmt, tab);
+      //if(tab.coverage.indexOf(3)!=-1)//console.log(ltype, fmt, tab);
 
       return tab;
     };
@@ -6657,7 +6657,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
       for (var p in obj) {
         tname = p;break;
       }
-      console.log("returning name table with languageID " + obj[tname]._lang);
+     //console.log("returning name table with languageID " + obj[tname]._lang);
       return obj[tname];
     };
 
@@ -6813,7 +6813,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           var d = nd.getAttribute("d"); //console.log(d);
           var toks = Typr.SVG._tokens(d); //console.log(toks);
           Typr.SVG._toksToPath(toks, pth);pth.cmds.push("X");
-        } else if (tn == "defs") ;else console.log(tn, nd);
+        } else if (tn == "defs") ;
       }
     };
 
@@ -6894,7 +6894,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                   x3 = xi + ts[i++],
                   y3 = yi + ts[i++];
               cmds.push("C");crds.push(x1, y1, x2, y2, x3, y3);x = x3;y = y3;
-            } else console.log("Unknown SVG command " + cmd);
+            } 
           }
         }
       }
@@ -7075,7 +7075,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                   var c2 = Typr.U._getGlyphClass(g2, ltab.classDef2);
                   adj = ltab.matrix[c1][c2];
                 }
-                //if(adj) console.log(ltab, adj);
+                //if(adj)//console.log(ltab, adj);
                 if (adj && adj.val2) return adj.val2[2];
               }
             }
@@ -7162,7 +7162,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
     };
     Typr.U._applySubs = function (gls, ci, tab, llist) {
       var rlim = gls.length - ci - 1;
-      //if(ci==0) console.log("++++ ", tab.ltype);
+      //if(ci==0)//console.log("++++ ", tab.ltype);
       for (var j = 0; j < tab.tabs.length; j++) {
         if (tab.tabs[j] == null) continue;
         var ltab = tab.tabs[j],
@@ -7170,7 +7170,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         if (ltab.coverage) {
           ind = Typr._lctf.coverageIndex(ltab.coverage, gls[ci]);if (ind == -1) continue;
         }
-        //if(ci==0) console.log(ind, ltab);
+        //if(ci==0)//console.log(ind, ltab);
         //*
         if (tab.ltype == 1) {
           var gl = gls[ci];
@@ -7237,7 +7237,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               Typr.U._applySubs(gls, ci + cind, tab2, llist);
             }
           }
-        //else console.log("Unknown table", tab.ltype, ltab.fmt);
+        //else//console.log("Unknown table", tab.ltype, ltab.fmt);
         //*/
       }
     };
@@ -7614,7 +7614,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
           {
             var obj = v == "o10" ? pdct : font;
             if (stack.length == 0) {
-              console.log("error: empty stack");
+             //console.log("error: empty stack");
             } else {
               var ind = stack.pop();
               var subr = obj.Subrs[ind + obj.Bias];
@@ -7658,7 +7658,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
               index += 4;
             }
           } else if ((v + "").charAt(0) == "o") {
-          console.log("Unknown operation: " + v, cmds);throw v;
+         //console.log("Unknown operation: " + v, cmds);throw v;
         } else stack.push(v);
       }
       //console.log(cmds);
@@ -8486,11 +8486,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
         visibleBounds: result.visibleBounds,
         timings: result.timings,
         get totalBounds() {
-          console.log('totalBounds deprecated, use blockBounds instead');
+         //console.log('totalBounds deprecated, use blockBounds instead');
           return result.blockBounds;
         },
         get totalBlockSize() {
-          console.log('totalBlockSize deprecated, use blockBounds instead');
+         //console.log('totalBlockSize deprecated, use blockBounds instead');
 
           var _result$blockBounds2 = _slicedToArray(result.blockBounds, 4),
               x0 = _result$blockBounds2[0],
